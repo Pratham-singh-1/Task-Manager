@@ -5,6 +5,7 @@ import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
 import FilterBar from "./components/FilterBar";
 import TaskSummary from "./components/TaskSummary";
+import { reorderTasks } from "./api/tasks";
 import "./App.css";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   const [error, setError] = useState(null);
   const [editingTask, setEditingTask] = useState(null); // null or a task object
   const [showForm, setShowForm] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   //Fetch tasks on load
   useEffect(() => {
@@ -73,12 +75,27 @@ function App() {
     setShowForm(true);
   }
 
+  async function handleReorder(newOrderedTasks) {
+    // Optimistic update — update UI immediately, then save to backend
+    setTasks(newOrderedTasks);
+    try {
+      await reorderTasks(newOrderedTasks.map((t) => t.id));
+    } catch (err) {
+      // If save fails, reload from server
+      loadTasks();
+    }
+  }
+
   //Filtered tasks
-  const filteredTasks = tasks.filter((task) => {
-    if (filter === "active") return !task.completed;
-    if (filter === "completed") return task.completed;
-    return true; // 'all'
-  });
+  const filteredTasks = tasks
+    .filter((task) => {
+      if (filter === "active") return !task.completed;
+      if (filter === "completed") return task.completed;
+      return true; // 'all'
+    })
+    .filter((task) =>
+      task.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
 
   // Render
   return (
@@ -98,6 +115,21 @@ function App() {
         >
           + Add Task
         </button>
+      </div>
+
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="🔍 Search tasks..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+        />
+        {searchQuery && (
+          <button className="search-clear" onClick={() => setSearchQuery("")}>
+            ✕
+          </button>
+        )}
       </div>
 
       {showForm && (
@@ -125,6 +157,7 @@ function App() {
           onToggle={handleToggle}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          onReorder={handleReorder}
         />
       )}
     </div>

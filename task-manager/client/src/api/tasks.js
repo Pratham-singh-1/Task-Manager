@@ -17,3 +17,6 @@ export const updateTask = (id, updates) =>
 
 export const deleteTask = (id) =>
   api.delete(`/tasks/${id}`).then((res) => res.data);
+
+export const reorderTasks = (orderedIds) =>
+  api.patch("/tasks/reorder", { orderedIds }).then((res) => res.data);

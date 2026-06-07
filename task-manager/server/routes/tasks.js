@@ -44,6 +44,30 @@ router.post("/", (req, res) => {
   }
 });
 
+// PATCH /api/tasks/reorder — save new task order
+router.patch("/reorder", (req, res) => {
+  try {
+    const { orderedIds } = req.body;
+    // orderedIds = ["id3", "id1", "id2"] — the new order
+
+    if (!Array.isArray(orderedIds)) {
+      return res.status(400).json({ error: "orderedIds must be an array" });
+    }
+
+    const tasks = readTasks();
+
+    // Sort tasks to match the new order
+    const reordered = orderedIds
+      .map((id) => tasks.find((t) => t.id === id))
+      .filter(Boolean); // remove any undefined
+
+    writeTasks(reordered);
+    res.json(reordered);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to reorder tasks" });
+  }
+});
+
 router.delete("/:id", (req, res) => {
   try {
     const { id } = req.params;
