@@ -4,8 +4,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3001/api",
-  // Change this one line when you deploy — nothing else changes
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3001/api",
 });
 
 export const getTasks = () => api.get("/tasks").then((res) => res.data);
