@@ -31,7 +31,7 @@ body {
   margin: 0;
   font-family: "DM Sans", sans-serif;
   min-height: 100vh;
-  background: linear-gradient(135deg, #e8e4f0 0%, #f0ede8 50%, #e8f0ed 100%);
+  background: linear-gradient(160deg, #dfe8f5 0%, #ede8f5 40%, #f5ebe8 100%);
 }
 
 /*  App Shell  */
@@ -42,9 +42,9 @@ body {
 }
 
 /* Header  */
-.app-header {
+app-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .app-header h1 {
@@ -106,11 +106,13 @@ body {
   justify-content: space-between;
   margin-bottom: 24px;
   gap: 12px;
-  background: white;
-  padding: 8px 8px 8px 8px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 6px 6px 8px;
   border-radius: 100px;
-  border: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
 }
 
 /*  Filter Bar */
@@ -125,7 +127,7 @@ body {
 .filter-bar button {
   padding: 6px 18px;
   border-radius: 100px;
-  border: none;
+  border: 1.5px solid transparent; /* transparent by default */
   background: transparent;
   color: var(--text-muted);
   font-family: "DM Sans", sans-serif;
@@ -137,12 +139,14 @@ body {
 
 .filter-bar button:hover {
   color: var(--text);
+  border-color: var(--border);
   background: var(--surface2);
 }
 
 .filter-bar button.active {
   background: var(--text);
   color: #fff;
+  border-color: var(--text);
   font-weight: 600;
 }
 
@@ -271,9 +275,10 @@ body {
 
 /*  Task Item  */
 .task-item {
-  background: var(--surface);
-  border: 2px solid #d4cfc9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
   border-radius: var(--radius);
   padding: 16px;
   display: flex;
@@ -282,6 +287,7 @@ body {
   transition: all 0.18s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .task-item::before {
@@ -296,7 +302,7 @@ body {
 }
 
 .task-item:hover {
-  box-shadow: var(--shadow);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
   transform: translateY(-1px);
 }
 
