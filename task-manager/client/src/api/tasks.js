@@ -1,11 +1,10 @@
-// This file is the ONLY place that knows about the backend URL
-// Every component imports from here — never writes fetch() directly
-
 import axios from "axios";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:3001/api",
 });
+
+console.log("API URL:", import.meta.env.VITE_API_URL);
 
 export const getTasks = () => api.get("/tasks").then((res) => res.data);
 

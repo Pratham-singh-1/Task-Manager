@@ -104,19 +104,6 @@ function App() {
 
       <TaskSummary tasks={tasks} />
 
-      <div className="toolbar">
-        <FilterBar filter={filter} onFilterChange={setFilter} />
-        <button
-          className="btn-add"
-          onClick={() => {
-            setEditingTask(null);
-            setShowForm(true);
-          }}
-        >
-          + Add Task
-        </button>
-      </div>
-
       <div className="search-bar">
         <input
           type="text"
@@ -130,6 +117,19 @@ function App() {
             ✕
           </button>
         )}
+      </div>
+
+      <div className="toolbar">
+        <FilterBar filter={filter} onFilterChange={setFilter} />
+        <button
+          className="btn-add"
+          onClick={() => {
+            setEditingTask(null);
+            setShowForm(true);
+          }}
+        >
+          + Add Task
+        </button>
       </div>
 
       {showForm && (

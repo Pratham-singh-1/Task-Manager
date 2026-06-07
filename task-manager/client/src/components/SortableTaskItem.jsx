@@ -16,11 +16,13 @@ function SortableTaskItem({ task, onToggle, onEdit, onDelete }) {
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.5 : 1,
-    cursor: "grab",
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} data-sortable>
+      <div className="drag-handle" {...attributes} {...listeners}>
+        ⠿
+      </div>
       <TaskItem
         task={task}
         onToggle={onToggle}

@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
       return res.status(400).json({ error: "Title is Required" });
     }
 
-    const newTasks = {
+    const newTask = {
       id: randomUUID(),
       title: title.trim(),
       description: description || "",
@@ -34,10 +34,10 @@ router.post("/", (req, res) => {
     };
 
     const tasks = readTasks();
-    tasks.push(newTasks);
+    tasks.push(newTask);
     writeTasks(tasks);
 
-    res.status(201).json(newTasks);
+    res.status(201).json(newTask);
   } catch (error) {
     console.log("ERROR:", error.message);
     res.status(500).json({ error: "Failed to create Task" });
