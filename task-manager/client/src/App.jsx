@@ -82,7 +82,7 @@ function App() {
 
   // Render
   return (
-    <div className="app-header">
+    <div className="app">
       <h1>Task Manager</h1>
 
       <TaskSummary tasks={tasks} />
