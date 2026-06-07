@@ -24,14 +24,18 @@ function TaskItem({ task, onToggle, onEdit, onDelete }) {
         {task.description && <p>{task.description}</p>}
         {task.dueDate && (
           <span className={isOverdue ? "overdue-label" : ""}>
-            Due: {new Date(task.dueDate).toLocaleDateString()}
+            Due: {new Date(task.dueDate).toLocaleDateString("en-GB")}
             {isOverdue && " — Overdue!"}
           </span>
         )}
       </div>
       <div className="task-actions">
-        <button onClick={() => onEdit(task)}>Edit</button>
-        <button onClick={handleDelete}>Delete</button>
+        <button className="btn-edit" onClick={() => onEdit(task)}>
+          Edit
+        </button>
+        <button className="btn-delete" onClick={handleDelete}>
+          Delete
+        </button>
       </div>
     </div>
   );

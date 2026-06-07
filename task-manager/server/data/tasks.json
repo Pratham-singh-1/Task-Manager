@@ -10,9 +10,25 @@
   {
     "id": "9ce8c8f1-9893-455f-8ac8-f3fcde52e0f5",
     "title": "Complete the Exercise 1",
-    "description": "",
+    "description": "The Task Manager Assissment for the Studio Graphene ",
+    "dueDate": "2026-06-06",
+    "completed": true,
+    "createdAt": "2026-06-07T09:11:17.142Z"
+  },
+  {
+    "id": "5028ee69-a69c-49b1-b7a6-f14da3ceed25",
+    "title": "Submit",
+    "description": "Submit the form for the  Exercise 1 on the link",
     "dueDate": "2026-06-07",
     "completed": false,
-    "createdAt": "2026-06-07T09:11:17.142Z"
+    "createdAt": "2026-06-07T09:42:50.374Z"
+  },
+  {
+    "id": "4c7557ea-57ac-4f98-baf2-7bf24ca2f371",
+    "title": "Deployment",
+    "description": "The the Deployment link in form",
+    "dueDate": "2026-06-08",
+    "completed": false,
+    "createdAt": "2026-06-07T09:43:36.737Z"
   }
 ]

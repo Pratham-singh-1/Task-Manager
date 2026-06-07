@@ -5,7 +5,7 @@ function TaskForm({ onSubmit, onCancel, initialData }) {
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
 
-  // If editing, pre-fill the form with existing data
+  //  pre-fill the form with existing data
   useEffect(() => {
     if (initialData) {
       setTitle(initialData.title || "");
@@ -15,8 +15,8 @@ function TaskForm({ onSubmit, onCancel, initialData }) {
   }, [initialData]);
 
   function handleSubmit(e) {
-    e.preventDefault(); // stop page from refreshing
-    if (!title.trim()) return; // basic validation
+    e.preventDefault();
+    if (!title.trim()) return;
 
     onSubmit({ title, description, dueDate });
   }
@@ -41,11 +41,11 @@ function TaskForm({ onSubmit, onCancel, initialData }) {
         onChange={(e) => setDueDate(e.target.value)}
       />
       <div className="form-buttons">
-        <button type="submit">
-          {initialData ? "Save Changes" : "Add Task"}
-        </button>
-        <button type="button" onClick={onCancel}>
+        <button type="button" className="btn-cancel" onClick={onCancel}>
           Cancel
+        </button>
+        <button type="submit" className="btn-submit">
+          {initialData ? "Save Changes" : "Add Task"}
         </button>
       </div>
     </form>

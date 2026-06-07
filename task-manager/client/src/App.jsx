@@ -8,15 +8,15 @@ import TaskSummary from "./components/TaskSummary";
 import "./App.css";
 
 function App() {
-  // ── State ──────────────────────────────────────
+  // State
   const [tasks, setTasks] = useState([]);
-  const [filter, setFilter] = useState("all"); // 'all' | 'active' | 'completed'
+  const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingTask, setEditingTask] = useState(null); // null or a task object
   const [showForm, setShowForm] = useState(false);
 
-  // ── Fetch tasks on load ─────────────────────────
+  //Fetch tasks on load
   useEffect(() => {
     loadTasks();
   }, []);
@@ -33,7 +33,7 @@ function App() {
     }
   }
 
-  // ── Handlers ───────────────────────────────────
+  //  Handlers
   async function handleCreate(taskData) {
     try {
       const newTask = await createTask(taskData);
@@ -73,30 +73,32 @@ function App() {
     setShowForm(true);
   }
 
-  // ── Filtered tasks ─────────────────────────────
+  //Filtered tasks
   const filteredTasks = tasks.filter((task) => {
     if (filter === "active") return !task.completed;
     if (filter === "completed") return task.completed;
     return true; // 'all'
   });
 
-  // ── Render ─────────────────────────────────────
+  // Render
   return (
     <div className="app">
       <h1>Task Manager</h1>
 
       <TaskSummary tasks={tasks} />
 
-      <FilterBar filter={filter} onFilterChange={setFilter} />
-
-      <button
-        onClick={() => {
-          setEditingTask(null);
-          setShowForm(true);
-        }}
-      >
-        + Add Task
-      </button>
+      <div className="toolbar">
+        <FilterBar filter={filter} onFilterChange={setFilter} />
+        <button
+          className="btn-add"
+          onClick={() => {
+            setEditingTask(null);
+            setShowForm(true);
+          }}
+        >
+          + Add Task
+        </button>
+      </div>
 
       {showForm && (
         <TaskForm
