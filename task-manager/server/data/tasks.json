@@ -1,0 +1,18 @@
+[
+  {
+    "id": "177f030f-7168-4557-b969-c773fa86ce5d",
+    "title": "Learn Express",
+    "description": "Build the backend",
+    "dueDate": "2026-06-05",
+    "completed": false,
+    "createdAt": "2026-06-07T08:50:40.724Z"
+  },
+  {
+    "id": "9ce8c8f1-9893-455f-8ac8-f3fcde52e0f5",
+    "title": "Complete the Exercise 1",
+    "description": "",
+    "dueDate": "2026-06-07",
+    "completed": false,
+    "createdAt": "2026-06-07T09:11:17.142Z"
+  }
+]

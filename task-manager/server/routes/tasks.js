@@ -11,11 +11,12 @@ router.get("/", (req, res) => {
 
     res.json(tasks);
   } catch (error) {
-    res.status(500).json({ erro: "Failed to Fetch tasks" });
+    res.status(500).json({ error: "Failed to Fetch tasks" });
   }
 });
 
 router.post("/", (req, res) => {
+  console.log("POST hit, body:", req.body);
   try {
     const { title, description, dueDate } = req.body;
 
@@ -23,7 +24,7 @@ router.post("/", (req, res) => {
       return res.status(400).json({ error: "Title is Required" });
     }
 
-    const newTask = {
+    const newTasks = {
       id: randomUUID(),
       title: title.trim(),
       description: description || "",
@@ -32,12 +33,13 @@ router.post("/", (req, res) => {
       createdAt: new Date().toISOString(),
     };
 
-    const task = readTasks();
+    const tasks = readTasks();
     tasks.push(newTasks);
     writeTasks(tasks);
 
-    res.status(201).json(newTask);
+    res.status(201).json(newTasks);
   } catch (error) {
+    console.log("ERROR:", error.message);
     res.status(500).json({ error: "Failed to create Task" });
   }
 });
@@ -63,6 +65,10 @@ router.delete("/:id", (req, res) => {
 router.put("/:id", (req, res) => {
   try {
     const { id } = req.params; // :id from the URL
+
+    console.log("PUT hit, id:", id);
+    console.log("PUT hit, body:", req.body);
+
     const { title, description, dueDate, completed } = req.body;
 
     const tasks = readTasks();
@@ -75,7 +81,7 @@ router.put("/:id", (req, res) => {
       // 404 = Not Found
     }
 
-    // Update only the fields that were sent
+    //  Update only the fields that were sent
     // The spread (...) keeps existing fields, then overrides changed ones
     tasks[taskIndex] = {
       ...tasks[taskIndex],
